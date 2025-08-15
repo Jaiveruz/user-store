@@ -42,8 +42,12 @@ export class AuthController {
     }
 
     validateEmail = async (req: Request, res: Response) => {
-        // Implement registration logic here
-        res.status(201).json({ message: 'validateEmail' });
+
+        const { token } = req.params;
+
+        this.authService.validateEmail(token)
+            .then(() => res.status(200).json({ message: 'Email validated successfully' }))
+            .catch(error => this.handleError(error, res));
     }
 
 }
