@@ -1,12 +1,12 @@
 import { Response, Request } from "express";
-import { CustomError, PaginationDto, CreateCategoryDto } from "../../domain";
-import { CategoryService } from "../services/category.service";
+import { CreateProductDto, CustomError, PaginationDto } from "../../domain";
+import { ProductService } from "../services/product.service";
 
 
-export class CategoryController {
+export class ProductsController {
 
     constructor(
-        private readonly categoryService: CategoryService
+        private readonly productService: ProductService
     ) {}
 
     private handleError = (error: unknown, res: Response ) => {
@@ -18,23 +18,27 @@ export class CategoryController {
         return res.status(500).json({ error: 'Internal server error' })
     }
 
-    createCategory =  async (req: Request, res: Response) => {
-        const [error, createCategoryDto] = CreateCategoryDto.create(req.body);
+    createProduct =  async (req: Request, res: Response) => {
+        const [error, createProductDto] = CreateProductDto.create({
+            ...req.body,
+            user: req.body.user.id
+        });
+        
         if ( error ) return res.status(400).json({error})
 
-        this.categoryService.createCategory(createCategoryDto!, req.body.user)
-            .then(category => res.status(201).json(category))
+        this.productService.createProduct(createProductDto!)
+            .then(product => res.status(201).json(product))
             .catch(err => this.handleError(err, res));
     };
 
-    getCategory = async (req: Request, res: Response) => {
+    getProducts = async (req: Request, res: Response) => {
         const { page = 1, limit = 10 } = req.query;
         const [error, paginationDto] = PaginationDto.create( +page, +limit);
 
         if (error) return res.status(400).json({ error });
 
-        this.categoryService.getCategory( paginationDto! )
-            .then(categories => res.status(200).json(categories))
+        this.productService.getProducts( paginationDto! )
+            .then(products => res.json(products))
             .catch(err => this.handleError(err, res));
 
     };

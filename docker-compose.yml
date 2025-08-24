@@ -12,9 +12,9 @@ services:
     volumes:
       - ./mongo:/data/db
     ports:
-      - 27018:27018
+      - 27017:27017
     # para mi la local se agrega este command para tomar cambiar el puerto
-    command: --port 27018
+    # command: --port 27018
 
   # postgres-db:
   #   image: postgres:15.3

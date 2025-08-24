@@ -1,8 +1,5 @@
 import { CategoryModel } from '../../data';
-import { CustomError, UserEntity } from '../../domain';
-import { CreateCategoryDto } from '../../domain/dtos/category/create-category.dto';
-import { PaginationDto } from '../../domain/dtos/shared/pagination.dto';
-
+import { CustomError, UserEntity, CreateCategoryDto, PaginationDto } from '../../domain';
 
 export class CategoryService {
 
