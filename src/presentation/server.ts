@@ -32,6 +32,10 @@ export class Server {
     this.app.use( express.json() ); // raw
     this.app.use( express.urlencoded({ extended: true }) ); // x-www-form-urlencoded
 
+    this.app.use(fileUpload({
+      limits: { fileSize: 50 * 1024 * 1024 },
+    }));
+
     //* Public Folder
     this.app.use( express.static( this.publicPath ) );
 
@@ -55,4 +59,8 @@ export class Server {
     this.serverListener?.close();
   }
 
+}
+
+function fileUpload(arg0: { limits: { fileSize: number; }; }): any {
+  throw new Error('Function not implemented.');
 }
