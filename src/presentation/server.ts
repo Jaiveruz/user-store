@@ -1,5 +1,6 @@
 import express, { Router } from 'express';
 import path from 'path';
+import fileUpload from 'express-fileupload';
 
 interface Options {
   port: number;
@@ -59,8 +60,4 @@ export class Server {
     this.serverListener?.close();
   }
 
-}
-
-function fileUpload(arg0: { limits: { fileSize: number; }; }): any {
-  throw new Error('Function not implemented.');
 }
