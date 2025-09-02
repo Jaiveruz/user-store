@@ -3,6 +3,7 @@ import { Authroutes } from './auth/routes';
 import { CategoryRoutes } from './category/route';
 import { ProductsRoutes } from './products/route';
 import { FileUploadRoutes } from './file-upload/route';
+import { ImageRoute } from './images/route';
 
 
 
@@ -19,6 +20,7 @@ export class AppRoutes {
     router.use('/api/categories', CategoryRoutes.routes );
     router.use('/api/products', ProductsRoutes.routes ); 
     router.use('/api/upload', FileUploadRoutes.routes );
+    router.use('/api/images', ImageRoute.routes );
 
 
 
